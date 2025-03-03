@@ -105,10 +105,10 @@ async fn main() {
 
     writeln!(
         listing,
-        "\"Player address\",\"Earned on appchain\",\"Claimed on mainnet\""
+        "\"player_address\",\"rewards_earned\",\"claims_balance\""
     )
     .unwrap();
-    writeln!(airdrop, "\"Player address\",\"Amount to airdrop\"").unwrap();
+    writeln!(airdrop, "\"player_address\",\"amount_to_airdrop\"").unwrap();
 
     let mut n_airdrop = 0;
 
