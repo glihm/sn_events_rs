@@ -60,6 +60,9 @@ async fn main() {
 
     for e in appchain_events {
         if e.keys[0] == selector!("StoreSetRecord") && e.keys[1] == NUMS_TOTALS_SELECTOR {
+            // https://github.com/cartridge-gg/nums/blob/d7ab1568b34308ea8f40bb70e2ce8e64a62922b8/contracts/appchain/src/systems/claim_actions.cairo#L85
+            // https://github.com/cartridge-gg/nums/blob/d7ab1568b34308ea8f40bb70e2ce8e64a62922b8/contracts/appchain/src/models/totals.cairo#L5
+
             // Player address is the only key.
             // data[0] = length of keys (0x1).
             let player_address = e.data[1];
@@ -77,6 +80,7 @@ async fn main() {
 
     for e in mainnet_events {
         if e.keys[0] == selector!("MessageConsumed") {
+            // https://github.com/cartridge-gg/nums/blob/d7ab1568b34308ea8f40bb70e2ce8e64a62922b8/contracts/starknet/dojo/src/systems/message_consumers.cairo#L72
             // Index 0 is length of data (0x3).
             // Index 1 is the player address.
             // Index 2 is the game id.
