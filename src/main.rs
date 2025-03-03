@@ -71,10 +71,8 @@ async fn main() {
             // data[2] = length of data (0x4).
             let rewards_earned = e.data[3];
 
-            appchain_player_rewards
-                .entry(player_address)
-                .and_modify(|e| *e += rewards_earned)
-                .or_insert(rewards_earned);
+            // We want to keep the most up to date event (latest).
+            appchain_player_rewards.insert(player_address, rewards_earned);
         }
     }
 
@@ -86,12 +84,12 @@ async fn main() {
             // Index 2 is the game id.
             // Index 3 is the amount of rewards earned.
             let player_address = e.data[1];
-            let rewards_earned = e.data[3];
+            let claimed_amount = e.data[3];
 
             mainnet_player_claims
                 .entry(player_address)
-                .and_modify(|e| *e += rewards_earned)
-                .or_insert(rewards_earned);
+                .and_modify(|e| *e += claimed_amount)
+                .or_insert(claimed_amount);
         }
     }
 
